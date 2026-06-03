@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Hub Pro - আপনার স্মার্ট ডকুমেন্ট ক্লাউড</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navbar Style */
+        nav {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6366f1;
+        }
+
+        nav .logo span {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .icon-blue { background-color: #3b82f6; }
+        .icon-green { background-color: #10b981; }
+        .icon-purple { background-color: #8b5cf6; }
+
+        .stat-info h3 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-info p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        /* Upload Area */
+        .upload-section {
+            background: var(--card-bg);
+            border: 2px dashed #cbd5e1;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 3rem;
+        }
+
+        .upload-section:hover {
+            border-color: var(--primary);
+            background-color: #f1f5f9;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .upload-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Document Table/List */
+        .doc-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .doc-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .doc-header h2 {
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+
+        .doc-list {
+            list-style: none;
+        }
+
+        .doc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
+        }
+
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+
+        .doc-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .doc-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .file-icon {
+            font-size: 1.5rem;
+            color: #ef4444;
+        }
+
+        .doc-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .doc-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .doc-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background-color: #f1f5f9;
+            color: var(--dark);
+        }
+
+        .btn-delete:hover {
+            background-color: #fee2e2;
+            color: #ef4444;
+            border-color: #fca5a5;
+        }
+
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--dark);
+            color: var(--text-muted);
+            margin-top: 5rem;
+        }
+
+        #file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fa-solid fa-cloud-arrow-up"></i> Document<span>Hub Pro</span></div>
+        <div><i class="fa-solid fa-user-circle" style="font-size: 1.5rem; cursor: pointer;"></i></div>
+    </nav>
+
+    <div class="hero">
+        <h1>আপনার স্মার্ট ডকুমেন্ট ক্লাউড</h1>
+        <p>যেকোনো ফাইল বা ডকুমেন্ট সহজে আপলোড করে সংরক্ষণ করুন এবং এক ক্লিকেই ম্যানেজ করুন সম্পূর্ণ ফ্রিতে।</p>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="fa-solid fa-file-lines"></i></div>
+                <div class="stat-info">
+                    <h3>মোট ফাইল</h3>
+                    <p id="total-count">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="fa-solid fa-database"></i></div>
+                <div class="stat-info">
+                    <h3>ব্যবহৃত স্পেস</h3>
+                    <p id="total-size">0.00 MB</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-purple"><i class="fa-solid fa-eye"></i></div>
+                <div class="stat-info">
+                    <h3>মোট ভিউ</h3>
+                    <p id="total-views">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-section" onclick="document.getElementById('file-input').click()">
+            <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <h3>এখানে ফাইল ড্র্যাগ করুন অথবা ব্রাউজ করুন</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">PDF, DOCX, PNG বা JPG ফাইল সিলেক্ট করুন</p>
+            <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
+            <button class="upload-btn">ফাইল সিলেক্ট করুন</button>
+        </div>
+
+        <div class="doc-section">
+            <div class="doc-header">
+                <h2>আমার আপলোড করা ডকুমেন্টসমূহ</h2>
+            </div>
+            <ul class="doc-list" id="document-list">
+                <div class="empty-state" id="empty-msg">
+                    <i class="fa-regular fa-folder-open" style="font-size: 2.5rem; margin-bottom: 0.5rem; display: block;"></i>
+                    কোনো ফাইল আপলোড করা হয়নি এখনো!
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Document Hub Pro. All Rights Reserved. Hosted Beautifully on GitHub.</p>
+    </footer>
+
+    <script>
+        let documents = JSON.parse(localStorage.getItem('my_docs')) || [];
+
+        function saveToStorage() {
+            localStorage.setItem('my_docs', JSON.stringify(documents));
+            renderDocuments();
+            updateStats();
+        }
+
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                
+                const newDoc = {
+                    id: Date.now() + Math.random().toString(36).substr(2, 5),
+                    name: file.name,
+                    size: sizeInMB,
+                    date: new Date().toLocaleDateString('bn-BD'),
+                    views: 0
+                };
+                
+                documents.push(newDoc);
+            }
+            saveToStorage();
+        }
+
+        function deleteDoc(id) {
+            if(confirm('আপনি কি নিশ্চিতভাবে এই ফাইলটি মুছে ফেলতে চান?')) {
+                documents = documents.filter(doc => doc.id !== id);
+                saveToStorage();
+            }
+        }
+
+        function viewDoc(id) {
+            const doc = documents.find(d => d.id === id);
+            if(doc) {
+                doc.views += 1;
+                saveToStorage();
+                alert(`"${doc.name}" ফাইলটি সফলভাবে ভিউ করা হয়েছে।`);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('total-count').textContent = documents.length;
+            const totalSize = documents.reduce((acc, doc) => acc + parseFloat(doc.size), 0).toFixed(2);
+            document.getElementById('total-size').textContent = `${totalSize} MB`;
+            const totalViews = documents.reduce((acc, doc) => acc + doc.views, 0);
+            document.getElementById('total-views').textContent = totalViews;
+        }
+
+        function renderDocuments() {
+            const listContainer = document.getElementById('document-list');
+            const emptyMsg = document.getElementById('empty-msg');
+            
+            listContainer.innerHTML = '';
+            
+            if (documents.length === 0) {
+                listContainer.appendChild(emptyMsg);
+                emptyMsg.style.display = 'block';
+                return;
+            }
+
+            documents.forEach(doc => {
+                const li = document.createElement('li');
+                li.className = 'doc-item';
+                li.innerHTML = `
+                    <div class="doc-details">
+                        <div class="file-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                        <div>
+                            <div class="doc-name">${doc.name}</div>
+                            <div class="doc-meta">সাইজ: ${doc.size} MB | তারিখ: ${doc.date} | ভিউ: ${doc.views} বার</div>
+                        </div>
+                    </div>
+                    <div class="doc-actions">
+                        <button class="action-btn" onclick="viewDoc('${doc.id}')" title="দেখুন"><i class="fa-solid fa-eye"></i></button>
+                        <button class="action-btn btn-delete" onclick="deleteDoc('${doc.id}')" title="মুছুন"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+                listContainer.appendChild(li);
+            });
+        }
+
+        // শুরুতে ডেটা লোড করা
+        renderDocuments();
+        updateStats();
+    </script>
+</body>
+</html>
